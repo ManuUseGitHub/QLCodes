@@ -8,7 +8,7 @@
   "types": "types/index.d.ts",
   "type": "module",
   "author": "Jean Luc Emmanuel VERHANNEMAN",
-  "license": "ISC",
+  "license": "MIT",
   "description": "A small utility that unifies SQL error codes (SQLSTATE) from different DBMS into a single, normalized structure through a curated dataset constructed at build time. The module is built from authoritative vendor documentation (IBM, PostgreSQL, Oracle) and generates static reference data at build time. Find references bellow.",
   "keywords": [
     "postgres",
