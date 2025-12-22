@@ -127,4 +127,4 @@ Use your customized build via a local dependency or a forked package.
 ---
 
 ## License
-[ISC](https://github.com/ManuUseGitHub/QLCodes/LICENSE)
+[MIT 2025](https://github.com/ManuUseGitHub/QLCodes?tab=MIT-1-ov-file#readme)
