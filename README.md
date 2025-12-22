@@ -39,7 +39,7 @@ console.log(error);
 
 Output :
 
-```json
+```js
 {
   code: "42501",
   keys: [ "insufficient_privilege" ],
@@ -70,7 +70,7 @@ console.log(error);
 
 Output:
 
-```json
+```js
 {
   code: "ABCDE",
   keys: [],
@@ -90,7 +90,7 @@ console.log(error);
 
 Output:
 
-```json
+```js
 {
   code: "2000U",
   keys: [],
