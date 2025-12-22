@@ -1,0 +1,24 @@
+{
+  "name": "qlcodes",
+  "version": "1.0.0",
+  "main": "src/index.mjs",
+  "scripts": {
+    "build": "chmod +x ./build.sh; ./build.sh"
+  },
+  "types": "types/index.d.ts",
+  "type": "module",
+  "author": "Jean Luc Emmanuel VERHANNEMAN",
+  "license": "ISC",
+  "description": "A small utility that unifies SQL error codes (SQLSTATE) from different DBMS into a single, normalized structure through a curated dataset constructed at build time. The module is built from authoritative vendor documentation (IBM, PostgreSQL, Oracle) and generates static reference data at build time. Find references bellow.",
+  "keywords": [
+    "postgres",
+    "ibm",
+    "sql",
+    "db",
+    "oracle",
+    "error",
+    "appendix",
+    "codes",
+    "guidance"
+  ]
+}
