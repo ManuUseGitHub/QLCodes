@@ -24,27 +24,28 @@ The module is built from authoritative vendor documentation (IBM, PostgreSQL, Or
 ## Installation
 
 ```bash
-npm install qlcodes
+$ npm install qlcodes
 ```
 
 ## Usage
 
 ```js
-    import { lens } from "qlcodes";
+import { lens } from "qlcodes";
     
-    const error = lens("42501");
+const error = lens("42501");
     
-    console.log(error);
+console.log(error);
 ```
 
 Output :
 
-```js
+```json
 {
-    code: "42501",
-    keys: ["insufficient_privilege"],
-    use: ["ibm", "postgres"],
-    reason: "The authorization ID does not have the privilege to perform the specified operation on the identified object."
+  code: "42501",
+  keys: [ "insufficient_privilege" ],
+  use: [ "ibm", "postgres" ],
+  reason: "The authorization ID does not have the privilege to perform the specified operation on the identified object.",
+  qlcs: "qlcodes_sucess"
 }
 ```
 
@@ -53,20 +54,49 @@ Output :
 If the provided SQLSTATE does not match any known entry, we return a normalized fallback object
 This guarantees that lens() always returns a predictable object shape.
 
+There are three mismatch levels that we detect.
+
+**Format** : The provided code is malformed and is not validate the expression /[0-9A-Z]{5}/
+  
+> ℹ️ ["SQLSTATE values are comprised of a two-character class code value, followed by a three-character subclass code value. (ISO/IEC 9075:1992)"](https://www.ibm.com/docs/en/db2-for-zos/12.0.0?topic=codes-sqlstate-values-common-error)
+
+**Class** : The provided code matches no code class
+
 ```js
-const error = lens("XXXXX");
+const error = lens("ABCDE");
 
 console.log(error);
 ```
 
 Output:
 
-```js
+```json
 {
-  code: "-1",
-  keys: ["qlcodes_not_found"],
+  code: "ABCDE",
+  keys: [],
+  qlcs: "qlcodes_no_class_found",
   use: [],
-  reason: "The code 'XXXXX' does not match any entries in qlcodes. This may be a qlcode issue only to provide you with the correct information"
+  reason: "The code 'ABCDE' does not match any entries in qlcodes. This may be a qlcode issue only to provide you with the correct information"
+}
+```
+
+**Code** : The provided code matches no code within known classes
+
+```js
+const error = lens("2000U");
+
+console.log(error);
+```
+
+Output:
+
+```json
+{
+  code: "2000U",
+  keys: [],
+  qlcs: "qlcodes_no_code_found",
+  use: [],
+  reason: "The code '2000U' does not match any entries in qlcodes. This may be a qlcode issue only to provide you with the correct information"
 }
 ```
 
@@ -82,6 +112,7 @@ Output:
 || **keys** — semantic identifiers
 || **use** — `DBMS` where the code is applicable
 || **reason** — human-readable explanation
+|| **qlcs** — 'qlcode status', shows the lens call status
 
 ## Customization & Rebuild (Contributors)
 
@@ -117,8 +148,8 @@ $ npm run build
 You may pass argument to the build script to enforce a few behaviours to help you seing through the process...
 |argument|effect|
 |-|-|
-|--debug|prevent the cleanup of middle stage file created during the data processing|
-|--make-keys|allow the creation of keys when a description is given...through the 'generate' step (`generate.cjs`)|
+|`--debug`|prevents the cleanup of middle stage file created during the data processing|
+|`--make-keys`|allows the creation of keys when a description is given...through the 'generate' step (`generate.cjs`)|
 
 
 

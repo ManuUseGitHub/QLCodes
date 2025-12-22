@@ -1,8 +1,9 @@
 import data from "../qlCodes.json" with { type : "json" };
 export const lens = (code) => {
 	let error = {
-		code: "-1",
+		code,
 		keys: [],
+		qlcs: "",
 		use: [],
 		reason: `The code '${code}' does not match any entries in qlcodes. This may be a qlcode issue only to provide you with the correct information`,
 	};
@@ -21,11 +22,17 @@ export const lens = (code) => {
 			throw "qlcodes_no_class_found";
 		}
 		const [_, foundClass] = search;
-		if (foundClass)
-			error = foundClass.errorSet.find((x) => (x.code = paddedCode));
-		else throw "qlcodes_no_code_found";
+		let result;
+		if (
+			foundClass &&
+			(result = foundClass.errorSet.find((x) => x.code == paddedCode))
+		) {
+			error = result;
+			console.log(error);
+			error.qlcs = "qlcodes_sucess";
+		} else throw "qlcodes_no_code_found";
 	} catch (err) {
-		error.keys = [typeof err == "string" ? err : "qlcodes_unexpected_error"];
+		error.qlcs = typeof err == "string" ? err : "qlcodes_unexpected_error";
 	}
 	return error;
 };

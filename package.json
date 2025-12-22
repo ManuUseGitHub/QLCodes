@@ -20,5 +20,8 @@
     "appendix",
     "codes",
     "guidance"
-  ]
+  ],
+  "repository": {
+    "url": "https://github.com/ManuUseGitHub/QLCodes"
+  }
 }

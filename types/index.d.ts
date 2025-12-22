@@ -20,6 +20,11 @@ export interface QLLens {
 	 * Human-readable explanation of the error.
 	 */
 	reason: string;
+
+	/**
+	 * Status of the lens method call
+	 */
+	qlcs: string;
 }
 
 /**
