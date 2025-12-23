@@ -2,24 +2,17 @@
 
 A small utility that unifies SQL codes describing states (SQLSTATE) from different DBMS into a single, normalized structure through a curated dataset constructed at build time.
 
-The module is built from authoritative vendor documentation (IBM, PostgreSQL, Oracle) and generates static reference data at build time. Find references bellow.
+The module is built from authoritative vendor documentation (IBM, PostgreSQL, Oracle) and generates static reference data at build time. [Find references bellow](/#user-content-references).
 
-## References
+## SQLSTATES coverage
 
-- IBM
-  [Listing of SQLSTATE values](https://www.ibm.com/docs/en/i/7.6.0?topic=codes-listing-sqlstate-values#cc__classcode00)
-  (Last Updated: 2025-09-29)
+The project aims to cover sql states for most of RDBMS [drivers supported by **Typeorm** such as Google Spanner](https://typeorm.io/docs/drivers/google-spanner).
+Find bellow the actual coverage:
 
-- Postgres codes
-  [Appendix A. PostgreSQL Error Codes](https://www.postgresql.org/docs/10/static/errcodes-appendix.html)
-  (V.10)
-
-
-- Oracle
-  [Oracle appendix](https://docs.oracle.com/cd/E15817_01/appdev.111/b31228/appd.htm)
-  11g Release 1 (11.1)
-
----
+🕓 MySQL | 🕓 MariaDB | ✅ PostgreSQL | 🕓 CockroachDB (Postgres-compatible)
+🕓 Microsoft SQL Server | ✅ Oracle | 🕓 SQLite | 🕓 SAP HANA | 🕓 Google Spanner
+✅ IBM*
+>( \* ) IBM defines and publishes SQLSTATE codes as part of the SQL standard, so their The codes should covere IBM products such as DB2, IBM Informix, IBM Netezza, IBM i (AS/400) .
 
 ## Installation
 
@@ -116,6 +109,7 @@ Output:
 ## API
 
 `lens(code: string): QLLens`
+
 |Parameters|Returns|
 |-|-|
 |**code** SQLSTATE status code | A structured status description|
@@ -151,25 +145,46 @@ $ npm install
 > unless you know what you know what you are doing.
 
 3) Rebuild the module
+
 ```bash
 $ npm run build
 ```
 
 ### Quality of life
+
 You may pass argument to the build script to enforce a few behaviours to help you seing through the process...
+
 |argument|effect|
 |-|-|
 |`--debug`|prevents the cleanup of middle stage file created during the data processing|
 |`--make-keys`|allows the creation of keys when a description is given...through the 'generate' step (`generate.cjs`)|
 
-
-
 Use your customized build via a local dependency or a forked package.
 
 ---
-## Showcase 
+
+## Showcase
+
 [in stackblitz](https://stackblitz.com/edit/stackblitz-starters-vjcs3q7x?file=index.js)
+
+---
+
+## References
+
+- IBM
+  [Listing of SQLSTATE values](https://www.ibm.com/docs/en/i/7.6.0?topic=codes-listing-sqlstate-values#cc__classcode00)
+  (Last Updated: 2025-09-29)
+
+- Postgres codes
+  [Appendix A. PostgreSQL Error Codes](https://www.postgresql.org/docs/10/static/errcodes-appendix.html)
+  (V.10)
+
+- Oracle
+  [Oracle appendix](https://docs.oracle.com/cd/E15817_01/appdev.111/b31228/appd.htm)
+  11g Release 1 (11.1)
+
 ---
 
 ## License
+
 [MIT 2025](https://github.com/ManuUseGitHub/QLCodes?tab=MIT-1-ov-file#readme)
