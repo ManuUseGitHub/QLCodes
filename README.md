@@ -60,12 +60,25 @@ There are three mismatch levels that we detect.
   
 > ℹ️ ["SQLSTATE values are comprised of a two-character class code value, followed by a three-character subclass code value. (ISO/IEC 9075:1992)"](https://www.ibm.com/docs/en/db2-for-zos/12.0.0?topic=codes-sqlstate-values-common-error)
 
+```js
+console.log(lens("123456"));
+```
+
+Output:
+
+```js
+{
+  code: "123456",
+  keys: [],
+  qlcs: "qlcodes_malformed",
+  use: [],
+  r
+```
+
 **Class** : The provided code matches no code class
 
 ```js
-const error = lens("ABCDE");
-
-console.log(error);
+console.log(lens("ABCDE"));
 ```
 
 Output:
@@ -83,9 +96,7 @@ Output:
 **Code** : The provided code matches no code within known classes
 
 ```js
-const error = lens("2000U");
-
-console.log(error);
+console.log(lens("2000U"));
 ```
 
 Output:

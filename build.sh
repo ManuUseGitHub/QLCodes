@@ -75,24 +75,24 @@ echo -e "MODES"
 echo -e "${YELLOW} $@ ${NC}"
 
 SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
-echo -e "${BLUE}Creating codes from $SCRIPT_DIR/references/IBM_errors.csv ${NC}"
+echo -e "${BLUE}Creating codes from $SCRIPT_DIR/references/IBM_states.csv ${NC}"
 cd src
 
-node readFile.mjs ../references/IBM_errors.csv |\
+node readFile.mjs ../references/IBM_states.csv |\
 node fileTransformer/sanitize.mjs |\
 node generate.cjs --flag "ibm" |\
 node fileTransformer/stopNamedKeys.mjs> "$DIR/output1.txt"
 
 echo -e "$CHECK done"
 
-echo -e "${BLUE}Creating codes from $SCRIPT_DIR/references/PSQL_errors.csv ${NC}"
-node readFile.mjs ../references/PSQL_errors.csv |\
+echo -e "${BLUE}Creating codes from $SCRIPT_DIR/references/PSQL_states.csv ${NC}"
+node readFile.mjs ../references/PSQL_states.csv |\
 node generate.cjs --flag "postgres" > "$DIR/output2.txt"
 
 echo -e "$CHECK done"
 
-echo -e "${BLUE}Creating codes from $SCRIPT_DIR/references/ORACLE_errors.csv ${NC}"
-node readFile.mjs ../references/ORACLE_errors.csv |\
+echo -e "${BLUE}Creating codes from $SCRIPT_DIR/references/ORACLE_states.csv ${NC}"
+node readFile.mjs ../references/ORACLE_states.csv |\
 node fileTransformer/sanitize2.mjs |\
 node generate.cjs --flag "oracle"> "$DIR/output3.txt"
 

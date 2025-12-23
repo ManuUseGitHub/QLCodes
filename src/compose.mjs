@@ -15,7 +15,7 @@ function flushBuffer(buffer, currentClass, currentCode) {
 	return [];
 }
 
-const apply = (text, errors = {}) => {
+const apply = (text, states = {}) => {
 	let buffer = [];
 	let currentClass = null;
 	let currentCode = null;
@@ -35,13 +35,13 @@ const apply = (text, errors = {}) => {
 
 			const { classCode, label } = classMatch.groups;
 
-			currentClass = errors[classCode]
-				? errors[classCode]
+			currentClass = states[classCode]
+				? states[classCode]
 				: {
 						label,
-						errorSet: [],
+						messageSet: [],
 				  };
-			errors[classCode] = currentClass;
+			states[classCode] = currentClass;
 			currentCode = null;
 			continue;
 		}
@@ -52,7 +52,7 @@ const apply = (text, errors = {}) => {
 			buffer = flushBuffer(buffer, currentClass, currentCode);
 
 			let { code, key, flags } = codeMatch.groups;
-			const foundCode = currentClass.errorSet.find((x) => x.code == code);
+			const foundCode = currentClass.messageSet.find((x) => x.code == code);
 			const use = flags.split(":").filter((x) => x);
 
 			key = key.substring(1);
@@ -69,7 +69,7 @@ const apply = (text, errors = {}) => {
 				currentCode.use = [...foundCode.use, ...use];
 			}
 			if (!foundCode) {
-				currentClass.errorSet.push(currentCode);
+				currentClass.messageSet.push(currentCode);
 			}
 			continue;
 		}
@@ -82,7 +82,7 @@ const apply = (text, errors = {}) => {
 
 	// Flush trailing reason
 	buffer = flushBuffer(buffer, currentClass, currentCode);
-	return errors;
+	return states;
 };
 
 const debugInFile = (file, data = null) => {
@@ -97,17 +97,17 @@ if (argv.options.file || argv.files.length) {
 
 	onStdIn((content) => {
 		const isDebug = process.env.DEBUG;
-		let errors;
+		let states;
 		try {
-			errors = JSON.parse(content ? content : "{}");
+			states = JSON.parse(content ? content : "{}");
 		} catch {
-			errors = {};
+			states = {};
 		}
 
-		debugInFile(file, JSON.stringify(errors, null, isDebug ? 2 : 0));
+		debugInFile(file, JSON.stringify(states, null, isDebug ? 2 : 0));
 
 		console.log(
-			JSON.stringify(apply(fs.readFileSync(file, "utf8"), errors), null, 2)
+			JSON.stringify(apply(fs.readFileSync(file, "utf8"), states), null, 2)
 		);
 	});
 }

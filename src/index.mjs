@@ -1,6 +1,6 @@
 import data from "../qlCodes.json" with { type : "json" };
 export const lens = (code) => {
-	let error = {
+	let message = {
 		code,
 		keys: [],
 		qlcs: "",
@@ -11,7 +11,7 @@ export const lens = (code) => {
 		if (
 			code == "" ||
 			(!code && code != "0") ||
-			!/[A-Z0-9]{5}/.test(`${code}`.padStart(5, "0"))
+			!/^[A-Z0-9]{5}$/.test(`${code}`.padStart(5, "0"))
 		)
 			throw "qlcodes_malformed";
 		const paddedCode = `${code}`.padStart(5, "0");
@@ -25,14 +25,13 @@ export const lens = (code) => {
 		let result;
 		if (
 			foundClass &&
-			(result = foundClass.errorSet.find((x) => x.code == paddedCode))
+			(result = foundClass.messageSet.find((x) => x.code == paddedCode))
 		) {
-			error = result;
-			console.log(error);
-			error.qlcs = "qlcodes_sucess";
+			message = result;
+			message.qlcs = "qlcodes_sucess";
 		} else throw "qlcodes_no_code_found";
 	} catch (err) {
-		error.qlcs = typeof err == "string" ? err : "qlcodes_unexpected_error";
+		message.qlcs = typeof err == "string" ? err : "qlcodes_unexpected_error";
 	}
-	return error;
+	return message;
 };
