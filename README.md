@@ -167,6 +167,9 @@ You may pass argument to the build script to enforce a few behaviours to help yo
 Use your customized build via a local dependency or a forked package.
 
 ---
+## Showcase 
+[in stackblitz](https://stackblitz.com/edit/stackblitz-starters-vjcs3q7x?file=index.js)
+---
 
 ## License
 [MIT 2025](https://github.com/ManuUseGitHub/QLCodes?tab=MIT-1-ov-file#readme)
