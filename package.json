@@ -22,6 +22,6 @@
     "guidance"
   ],
   "repository": {
-    "url": "https://github.com/ManuUseGitHub/QLCodes"
+    "url": "git+https://github.com/ManuUseGitHub/QLCodes.git"
   }
 }
