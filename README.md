@@ -1,6 +1,6 @@
 # QLCodes
 
-A small utility that unifies SQL error codes (SQLSTATE) from different DBMS into a single, normalized structure through a curated dataset constructed at build time.
+A small utility that unifies SQL codes describing states (SQLSTATE) from different DBMS into a single, normalized structure through a curated dataset constructed at build time.
 
 The module is built from authoritative vendor documentation (IBM, PostgreSQL, Oracle) and generates static reference data at build time. Find references bellow.
 
@@ -32,9 +32,9 @@ $ npm install qlcodes
 ```js
 import { lens } from "qlcodes";
     
-const error = lens("42501");
+const state = lens("42501");
     
-console.log(error);
+console.log(state);
 ```
 
 Output :
@@ -118,7 +118,7 @@ Output:
 `lens(code: string): QLLens`
 |Parameters|Returns|
 |-|-|
-|**code** SQLSTATE error code | A structured error description|
+|**code** SQLSTATE status code | A structured status description|
 || **code** — normalized SQLSTATE, or `-1` if not found
 || **keys** — semantic identifiers
 || **use** — `DBMS` where the code is applicable
@@ -135,7 +135,7 @@ If you want to extend or adjust the reference data:
 1) Clone the repository
 
 ```bash
-$ git clone <repository-url>
+$ git clone https://github.com/ManuUseGitHub/QLCodes.git
 $ cd qlcodes
 $ npm install
 ```
