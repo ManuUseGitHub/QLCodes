@@ -1,6 +1,6 @@
-import { onStdIn } from "../utils/io.mjs";
+import { onstdin } from "onstdin";
 
-onStdIn((input) => {
+onstdin((input) => {
 	console.log(
 		input
 			.replaceAll("SQLSTATE Value;Meaning", "")

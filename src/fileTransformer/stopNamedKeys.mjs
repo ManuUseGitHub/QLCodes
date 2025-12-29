@@ -1,6 +1,6 @@
-import { onStdIn } from "../utils/io.mjs";
+import { onstdin } from "onstdin";
 
-onStdIn((input) => {
+onstdin((input) => {
 	console.log(
 		input
 			.replaceAll(/ use_of_| the_| an_| a_|for_the_|_the|of_the_/gm, "")

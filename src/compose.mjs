@@ -1,7 +1,7 @@
 import fs from "fs";
-import { onStdIn } from "./utils/io.mjs";
+import { onstdin } from "onstdin";
 import { CODE_RE, CLASS_RE, COMMENT_RE } from "./regex.mjs";
-import { reargv } from "./utils/args.mjs";
+import { reargv } from "reargv";
 const argv = reargv();
 function flushBuffer(buffer, currentClass, currentCode) {
 	if (!buffer.length) return buffer;
@@ -95,10 +95,11 @@ const debugInFile = (file, data = null) => {
 if (argv.options.file || argv.files.length) {
 	const file = argv.options.file || argv.files[0];
 
-	onStdIn((content) => {
+	onstdin((content) => {
 		const isDebug = process.env.DEBUG;
 		let states;
 		try {
+			debugInFile(file, `content!${content}!`);
 			states = JSON.parse(content ? content : "{}");
 		} catch {
 			states = {};

@@ -1,7 +1,7 @@
 import { insertHeadersAndFormat } from "../utils/codeName.mjs";
-import { onStdIn } from "../utils/io.mjs";
+import { onstdin } from "onstdin";
 
-onStdIn((input) => {
+onstdin((input) => {
 	console.log(
 		insertHeadersAndFormat(
 			input

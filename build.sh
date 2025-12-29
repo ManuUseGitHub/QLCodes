@@ -99,7 +99,7 @@ node generate.cjs --flag "oracle"> "$DIR/output3.txt"
 echo -e "$CHECK done"
 
 echo -e "${BLUE}Composition of the JSON file at $DIR/qlCodes.json${NC}"
-echo {} | node compose.mjs --file "$DIR/output1.txt"|\
+node compose.mjs --file "$DIR/output1.txt"|\
 node compose.mjs --file "$DIR/output2.txt" |\
 node compose.mjs --file "$DIR/output3.txt" |\
 node pretty.mjs --file "$DIR/qlCodes.json"

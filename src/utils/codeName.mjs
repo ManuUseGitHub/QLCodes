@@ -1,5 +1,5 @@
-import { reargv } from "./args.mjs";
-import { toSnakeCase } from "./str.mjs";
+import { reargv } from "reargv";
+import toSnakeCase from "to-snake-case";
 
 const argv = reargv();
 

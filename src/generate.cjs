@@ -1,8 +1,8 @@
 const fs = require("fs");
 const { ERROR_CODE_HEADER_RGX } = require("./regex.mjs");
 const { newCode } = require("./utils/codeName.mjs");
-const { reargv } = require("./utils/args.mjs");
-const { onStdIn } = require("./utils/io.mjs");
+const { onstdin } = require("onstdin");
+const { reargv } = require("reargv");
 
 const argv = reargv();
 
@@ -36,7 +36,7 @@ if (argv.options.file || argv.files.length) {
 	const file = argv.options.file || argv.files[0];
 	console.log(processCSVLines(fs.readFileSync(file, "utf8")));
 } else {
-	onStdIn((csv) => {
+	onstdin((csv) => {
 		console.log(processCSVLines(csv));
 	});
 }

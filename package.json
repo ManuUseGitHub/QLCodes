@@ -23,5 +23,10 @@
   ],
   "repository": {
     "url": "git+https://github.com/ManuUseGitHub/QLCodes.git"
+  },
+  "dependencies": {
+    "onstdin": "^1.0.0",
+    "reargv": "^1.0.2",
+    "to-snake-case": "^1.0.0"
   }
 }
