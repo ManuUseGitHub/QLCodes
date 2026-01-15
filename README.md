@@ -182,6 +182,15 @@ Use your customized build via a local dependency or a forked package.
   [Oracle appendix](https://docs.oracle.com/cd/E15817_01/appdev.111/b31228/appd.htm)
   11g Release 1 (11.1)
 
+- MariaDb
+  [MariaDB Error Code Reference](https://mariadb.com/docs/server/reference/error-codes/mariadb-error-code-reference)
+
+- Google Spanner
+  [Spanner error codes](https://docs.cloud.google.com/spanner/docs/error-codes)
+
+- SAP Hana
+  [SAP HANA SQL Reference Guide for SAP HANA Platform](https://help.sap.com/docs/SAP_HANA_PLATFORM/4fe29514fd584807ac9f2a04f6754767/20a78d3275191014b41bae7c4a46d835.html) V2.0 SPS 08
+
 ---
 
 ## License

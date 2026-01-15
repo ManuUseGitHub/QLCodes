@@ -14,7 +14,7 @@ const getFlags = () => (argv.options.flag || "").split(",").join(":");
 const isMakeKeys = process.env.MAKE_KEYS === "true";
 export const newCode = (line, currentClassCode) => {
 	const flags = getFlags();
-	const [left, right] = line.split(";", 2);
+	const [left, right, more] = line.split(";", 3);
 
 	const code = normalizeCode(left.trim(), currentClassCode);
 	const description = right.trim();

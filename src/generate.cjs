@@ -6,30 +6,42 @@ const { reargv } = require("reargv");
 
 const argv = reargv();
 
+const pushHeader = (lines, groups) => {
+	let { label, class_code } = groups;
+
+	label = label.replace(/^Unqualified\s+/i, "");
+	lines.push("", `Class ${class_code} — ${label}`);
+	return class_code;
+};
+
+const getActualClassHeader = (lines, code) => {
+	let match;
+	let matchedClassCode;
+	if ((match = ERROR_CODE_HEADER_RGX.exec(code))) {
+		matchedClassCode = pushHeader(lines, match.groups);
+	}
+	return matchedClassCode;
+};
+
 const processCSVLines = (fileCSVText) => {
-	let output = [];
+	let lines = [];
 	let currentClassCode = null;
 	for (const line of fileCSVText.split(/\r?\n/)) {
 		if (!line.trim()) continue;
 
 		const [code] = line.split(";", 2);
 
-		let match;
-		if ((match = ERROR_CODE_HEADER_RGX.exec(code))) {
-			let { label, class_code } = match.groups;
-
-			label = label.replace(/^Unqualified\s+/i, "");
-			output.push("", `Class ${class_code} — ${label}`);
-
-			currentClassCode = class_code;
+		let changedClass = getActualClassHeader(lines, code);
+		if (changedClass) {
+			currentClassCode = changedClass;
 			continue;
 		}
 
 		if (!currentClassCode) continue;
 
-		output.push(...newCode(line, currentClassCode));
+		lines.push(...newCode(line, currentClassCode));
 	}
-	return output.join("\n");
+	return lines.join("\n");
 };
 
 if (argv.options.file || argv.files.length) {

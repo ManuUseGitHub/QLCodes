@@ -3,7 +3,10 @@
   "version": "1.1.4",
   "main": "src/index.mjs",
   "scripts": {
-    "build": "chmod +x ./build.sh; ./build.sh"
+    "build": "chmod +x ./build.sh; ./build.sh",
+    "build2": "chmod +x ./build2.sh; ./build2.sh",
+    "fetch": "clear; chmod +x display.sh; node ./src/fetch2.mjs | ./display.sh",
+    "refetch": "clear; chmod +x ./cleanUpCsvReferences.sh; ./cleanUpCsvReferences.sh" 
   },
   "types": "types/index.d.ts",
   "type": "module",
@@ -25,6 +28,7 @@
     "url": "git+https://github.com/ManuUseGitHub/QLCodes.git"
   },
   "dependencies": {
+    "@maze014/dom-fetch": "file:../corsanwr",
     "onstdin": "^1.0.0",
     "reargv": "^1.0.2",
     "to-snake-case": "^1.0.0"
