@@ -1,7 +1,7 @@
 import data from "../headers.config.json" with { type : "json" }
 
-const CSV_BASE_PATH = "./references/CSV/"
-const HTML_BASE_PATH = "./references/HTML/"
+const CSV_BASE_PATH = "./ressources/CSV/"
+const HTML_BASE_PATH = "./ressources/HTML/"
 
 // MARIA DB ==================================================================
 export const MARIA_HTML_PAGE_URL =

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-chmod +x ./func.sh
-. ./func.sh
+. ./shell/func.sh
 
 GREEN="\033[0;32m"
 BLUE="\033[0;34m"
