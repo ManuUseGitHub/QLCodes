@@ -1,4 +1,4 @@
-import data from "../qlCodes.json" with { type : "json" };
+import data from "../dist/qlCodes.old.json" with { type : "json" };
 export const lens = (code) => {
 	let message = {
 		code,

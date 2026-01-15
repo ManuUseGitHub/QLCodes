@@ -9,8 +9,8 @@ NC="\033[0m"
 CHECK="${GREEN}✔${NC}"
 CROSS="${RED}✖${NC}"
 
-DIR="$( cd "$( dirname "$0" )" && pwd )"
-OUT_FILE="qlCodes.json"
+DIR="$( cd "$( dirname "$0" )" && pwd )/.."
+OUT_FILE="../dist/qlCodes.json"
 
 # ---- BOX FUNCTION -----------------------------------------------------------
 

@@ -1,6 +1,6 @@
 #!/bin/bash
-chmod +x ./func.sh
-. ./func.sh
+chmod +x ./shell/func.sh
+. ./shell/func.sh
 
 OUT_FILE="qlCodes.json"
 

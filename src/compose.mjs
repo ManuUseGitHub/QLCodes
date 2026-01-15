@@ -2,6 +2,8 @@ import fs from "fs";
 import { onstdin } from "onstdin";
 import { CODE_RE, CLASS_RE, COMMENT_RE } from "./regex.mjs";
 import { reargv } from "reargv";
+import { DEBUG_PATH } from "./constants.mjs";
+import path from "path";
 const argv = reargv();
 function flushBuffer(buffer, currentClass, currentCode) {
 	if (!buffer.length) return buffer;
@@ -89,7 +91,10 @@ const debugInFile = (file, data = null) => {
 	const isDebug = process.env.DEBUG;
 	if (isDebug) {
 		const fileName = file.replaceAll("../", "");
-		fs.writeFileSync(fileName + ".debug.json", data);
+		fs.writeFileSync(
+			path.join("../", DEBUG_PATH, path.basename(fileName + ".debug.json")),
+			data
+		);
 	}
 };
 if (argv.options.file || argv.files.length) {

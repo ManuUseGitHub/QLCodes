@@ -3,12 +3,11 @@
   "version": "1.1.4",
   "main": "src/index.mjs",
   "scripts": {
-    "prepare": "clear; cd ./shell; chmod +x ./*.sh",
-    "build": "./build.sh",
-    "build2": "./build2.sh",
-    "fetch": "node ./src/fetch2.mjs | ./shell/display.sh",
+    "build": "./shell/build.sh",
+    "build2": "./shell/build2.sh",
+    "fetch": "node ./src/fetch.mjs | ./shell/display.sh",
     "refetch": "./cleanUpCsvReferences.sh",
-    "dev": "npm run prepare; ./shell/settle.sh"
+    "dev": "clear; cd ./shell; chmod +x ./*.sh; cd .. ; ./shell/settle.sh"
   },
   "types": "types/index.d.ts",
   "type": "module",
