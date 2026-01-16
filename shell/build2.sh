@@ -1,7 +1,7 @@
 #!/bin/bash
 . ./shell/func.sh
 
-OUT_FILE="../dist/qlCodes2.json"
+OUT_FILE="qlCodes3.json"
 
 start_time=$(date +%s)
 
@@ -29,20 +29,36 @@ echo -e "${YELLOW} $@ ${NC}"
 echo -e "reference files read from\n${YELLOW}$DIR/ressources${NC}\n"
 
 SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )/.."
-echo -e "${BLUE}Creating codes from $SCRIPT_DIR/ressources/CSV/IBM_states.csv ${NC}"
+echo -e "${BLUE}Creating codes from $SCRIPT_DIR/ressources/CSV/IBM_states2.csv ${NC}"
 cd src
 
-node readFile.mjs ../ressources/CSV/MARIA_DB_codes.csv |\
-node fileTransformer/trimHeader.mjs |\
-node generate.cjs --flag "maria" |\
-node fileTransformer/stopNamedKeys.mjs> "$DIR/ressources/Debug/output4.txt"
+node readFile.mjs $DIR/ressources/CSV/IBM_states2.csv |\
+node fileTransformer/sanitize.mjs |\
+node generate.cjs --flag "ibm" |\
+node fileTransformer/stopNamedKeys.mjs> "$DIR/ressources/Debug/output1.txt"
 
 printSuccess done
 
 echo -e "${BLUE}Composing the resulting JSON file at\n${YELLOW}$DIR${NC}\n"
 echo -e "${BLUE}Composing ${YELLOW}(...)/$OUT_FILE${NC}"
-node compose.mjs --file "$DIR/ressources/Debug/output4.txt"|\
-node pretty.mjs --file "$DIR/$OUT_FILE"
+node readFile.mjs $DIR/ressources/CSV/POSTGRES_states2.csv |\
+node generate.cjs --flag "postgres" > "$DIR/ressources/Debug/output2.txt"
+
+printSuccess done
+
+echo -e "${BLUE}Creating codes from ${YELLOW}(...)/references/ORACLE_states.csv ${NC}"
+node readFile.mjs $DIR/ressources/CSV/oracle_states.csv |\
+node fileTransformer/sanitize2.mjs |\
+node generate.cjs --flag "oracle"> "$DIR/ressources/Debug/output3.txt"
+
+printSuccess done
+
+echo -e "${BLUE}Composing the resulting JSON file at\n${YELLOW}$DIR${NC}\n"
+echo -e "${BLUE}Composing ${YELLOW}(...)/$OUT_FILE${NC}"
+node compose.mjs --file "$DIR/ressources/Debug/output1.txt"|\
+node compose.mjs --file "$DIR/ressources/Debug/output2.txt" |\
+node compose.mjs --file "$DIR/ressources/Debug/output3.txt" |\
+node pretty.mjs --file "$DIR/dist/$OUT_FILE"
 printSuccess composed
 
 if ! $DEBUG ;
