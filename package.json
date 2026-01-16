@@ -28,8 +28,8 @@
   "repository": {
     "url": "git+https://github.com/ManuUseGitHub/QLCodes.git"
   },
-  "dependencies": {
-    "@maze014/dom-fetch": "file:../corsanwr",
+  "devDependencies": {
+    "@maze014/dom-fetch": "^1.2.1",
     "onstdin": "^1.0.0",
     "reargv": "^1.0.2",
     "to-snake-case": "^1.0.0"
