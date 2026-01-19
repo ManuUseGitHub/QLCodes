@@ -1,5 +1,5 @@
 export const ERROR_CODE_HEADER_RGX =
-	/^(?:Table \d+\.\sClass\sCode|Class)\s+(?<class_code>[0-9A-Z]{2})[^\w]+(?<label>.+)\n?/;
+	/^(?:Table \d+\.\sClass\sCode|Class)\s+(?<classCode>[0-9A-Z]{2})[^\w]+(?<label>.+)\n?/;
 
 // Class after generate header
 export const CLASS_RE =

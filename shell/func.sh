@@ -42,11 +42,11 @@ print_box () {
     # Build border
     local border=$(printf '%*s' "$box_width" '' | tr ' ' '_')
     local blank=$(printf '%*s' "$box_width" '' | tr ' ' ' ')
-    echo -e "${GREEN}" 
+    echo -e "${GREEN}"
     echo " _$border""_"
-    echo "/ $blank"" \\" 
+    echo "/ $blank"" \\"
     echo "  ${left_spaces}${text}${right_spaces}"
-    echo "\\_$border""_/" 
+    echo "\\_$border""_/"
     echo -e "${NC}"
 }
 
@@ -63,4 +63,9 @@ printFail(){
 printError(){
   local text="$1"
   echo -e "$RED $text $NC"
+}
+
+printStep(){
+  local text="$1"
+   echo -e "${BLUE}$text${NC}"
 }

@@ -1,8 +1,8 @@
-import data from "../headers.config.json" with { type : "json" }
+import { readFileSync } from "fs";
 
-export const CSV_BASE_PATH = "./ressources/CSV/"
-export const HTML_BASE_PATH = "./ressources/HTML/"
-export const DEBUG_PATH = "ressources/Debug/"
+export const CSV_BASE_PATH = "./ressources/CSV/";
+export const HTML_BASE_PATH = "./ressources/HTML/";
+export const DEBUG_PATH = "ressources/Debug/";
 
 // MARIA DB ==================================================================
 export const MARIA_HTML_PAGE_URL =
@@ -80,6 +80,8 @@ export const QLC_MARKER = "[_QLC_LI_]";
 
 // OPTIONS ===================================================================
 
+const { headers } = JSON.parse(readFileSync(".qlCodes"));
+
 export const IBMoptions = {
 	source: {
 		tableUrl: IBM_HTML_STATES_REF_URL,
@@ -87,7 +89,7 @@ export const IBMoptions = {
 		csvFile: IBM_CSV_PATH,
 	},
 	headers: {
-		descriptors: data.ibm,
+		descriptors: headers.ibm,
 	},
 	localFileTableSelector: "table",
 	columnSize: IBM_DB_COLUMN_SIZE,
@@ -104,7 +106,7 @@ export const MARIAoptions = {
 		csvFile: MARIA_CSV_PATH,
 	},
 	headers: {
-		descriptors: data.mariaDb,
+		descriptors: headers.mariaDb,
 	},
 	localFileTableSelector: "table",
 	columnSize: MARIA_DB_COLUMN_SIZE,
@@ -121,7 +123,7 @@ export const ORACLEoptions = {
 		csvFile: ORACLE_CSV_PATH,
 	},
 	headers: {
-		descriptors: data.oracle,
+		descriptors: headers.oracle,
 	},
 	localFileTableSelector: "table",
 	columnSize: ORACLE_DB_COLUMN_SIZE,
@@ -138,7 +140,7 @@ export const G_SPANNERoptions = {
 		csvFile: G_SPANNER_CSV_PATH,
 	},
 	headers: {
-		descriptors: data.googleSpanner,
+		descriptors: headers.googleSpanner,
 	},
 	localFileTableSelector: "table",
 	columnSize: G_SPANNER_DB_COLUMN_SIZE,
@@ -157,7 +159,7 @@ export const SAP_HANAoptions = {
 		csvFile: SAP_HANA_CSV_PATH,
 	},
 	headers: {
-		descriptors: data.sapHanna,
+		descriptors: headers.sapHanna,
 	},
 	localFileTableSelector: "table",
 	columnSize: SAP_HANA_DB_COLUMN_SIZE,
@@ -175,7 +177,7 @@ export const POSTGRESoptions = {
 		csvFile: POSTGRES_CSV_PATH,
 	},
 	headers: {
-		descriptors: data.postgres,
+		descriptors: headers.postgres,
 	},
 	localFileTableSelector: "table",
 	columnSize: POSTGRES_DB_COLUMN_SIZE,

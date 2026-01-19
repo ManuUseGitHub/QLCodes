@@ -1,5 +1,4 @@
 #!/bin/bash
-chmod +x ./shell/func.sh
 . ./shell/func.sh
 
 OUT_FILE="qlCodes.json"
@@ -27,46 +26,27 @@ print_box "$(basename "$0") execution" 64
 
 echo -e "MODES"
 echo -e "${YELLOW} $@ ${NC}"
-echo -e "reference files read from\n${YELLOW}$DIR/references${NC}\n"
+echo -e "reference files read from\n${YELLOW}$DIR/ressources/CSV${NC}\n"
 
-SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
-echo -e "${BLUE}Creating codes from ${YELLOW}(...)/references/IBM_states.csv ${NC}"
-cd src
 
-node readFile.mjs ../references/IBM_states2.csv |\
-node fileTransformer/sanitize.mjs |\
-node generate.cjs --flag "ibm" |\
-node fileTransformer/stopNamedKeys.mjs> "$DIR/output1.txt"
+printStep "Composing the resulting JSON file at\n${YELLOW}$DIR${NC}\n"
+printStep "Composing ${YELLOW}(...)/$OUT_FILE${NC}"
 
-printSuccess done
-
-echo -e "${BLUE}Creating codes from ${YELLOW}(...)/references/PSQL_states.csv ${NC}"
-node readFile.mjs ../references/PSQL_states.csv |\
-node generate.cjs --flag "postgres" > "$DIR/output2.txt"
-
-printSuccess done
-
-echo -e "${BLUE}Creating codes from ${YELLOW}(...)/references/ORACLE_states.csv ${NC}"
-node readFile.mjs ../references/ORACLE_states.csv |\
-node fileTransformer/sanitize2.mjs |\
-node generate.cjs --flag "oracle"> "$DIR/output3.txt"
-
-printSuccess done
-
-echo -e "${BLUE}Composing the resulting JSON file at\n${YELLOW}$DIR${NC}\n"
-echo -e "${BLUE}Composing ${YELLOW}(...)/$OUT_FILE${NC}"
-node compose.mjs --file "$DIR/output1.txt"|\
-node compose.mjs --file "$DIR/output2.txt" |\
-node compose.mjs --file "$DIR/output3.txt" |\
-node pretty.mjs --file "$DIR/$OUT_FILE"
+node ./src/composeCsv.mjs "$DIR/ressources/CSV/POSTGRES_states2.csv"  --flags 'pgsql' |\
+node ./src/composeCsv.mjs "$DIR/ressources/CSV/IBM_states2.csv"  --flags 'ibm' |\
+node ./src/composeCsv.mjs "$DIR/ressources/CSV/oracle_states.csv"  --flags 'oracle' |\
+node ./src/composeCsv.mjs "$DIR/ressources/CSV/MARIA_DB_codes2.csv"  --flags 'maria' |\
+node ./src/composeCsv.mjs "$DIR/ressources/CSV/sap_hana_states.csv"  --flags 'sap_hana' |\
+node ./src/composeCsv.mjs "$DIR/ressources/CSV/gSpanner_states.csv"  --flags 'google_spanner' |\
+node ./src/pretty.mjs --file "$DIR/$OUT_FILE"
 printSuccess composed
+
+print_box cleanup 64
 
 if ! $DEBUG ;
 then
-  echo -e "${BLUE}removing processing files.${NC}"
-  cd .. ; rm "$DIR/output1.txt" ; rm "$DIR/output1.txt.debug.json"
-  cd .. ; rm "$DIR/output2.txt" ; rm "$DIR/output2.txt.debug.json"
-  cd .. ; rm "$DIR/output3.txt" ; rm "$DIR/output3.txt.debug.json"
+  printStep "removing processing files."
+  rm -v $DIR/ressources/Debug/*.* | ./shell/display.sh
   printSuccess removed
 fi
 

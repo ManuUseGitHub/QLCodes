@@ -108,7 +108,7 @@ const _pushLinesOneByOne = async (fetchOptions, data, lines) => {
 	for (const e of data) {
 		const index = fetchOptions.headers.order[col];
 		const quoted = fetchOptions.headers.quoted[index];
-		let text = quoted ? `"${e.text}"` : e.text;
+		let text = quoted ? `"${e.text.replaceAll(/"/gm,"''")}"` : e.text;
 
 		const intro = await _pushListLines(e, lines);
 		if (intro) {

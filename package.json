@@ -4,9 +4,8 @@
   "main": "src/index.mjs",
   "scripts": {
     "build": "./shell/build.sh",
-    "build2": "./shell/build2.sh",
     "fetch": "node ./src/fetch.mjs | ./shell/display.sh",
-    "refetch": "./cleanUpCsvReferences.sh",
+    "refetch": "./shell/cleanUpCsvReferences.sh",
     "dev": "clear; cd ./shell; chmod +x ./*.sh; cd .. ; ./shell/settle.sh"
   },
   "types": "types/index.d.ts",
@@ -30,6 +29,7 @@
   },
   "devDependencies": {
     "@maze014/dom-fetch": "^1.2.1",
+    "csv-parse": "^6.1.0",
     "onstdin": "^1.0.0",
     "reargv": "^1.0.2",
     "to-snake-case": "^1.0.0"
