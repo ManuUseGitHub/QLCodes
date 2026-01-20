@@ -1,8 +1,8 @@
 import { readFileSync } from "fs";
 
-export const CSV_BASE_PATH = "./ressources/CSV/";
-export const HTML_BASE_PATH = "./ressources/HTML/";
-export const DEBUG_PATH = "ressources/Debug/";
+export const CSV_BASE_PATH = "./resources/CSV/";
+export const HTML_BASE_PATH = "./resources/HTML/";
+export const DEBUG_PATH = "resources/Debug/";
 
 // MARIA DB ==================================================================
 export const MARIA_HTML_PAGE_URL =

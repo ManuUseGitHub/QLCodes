@@ -113,9 +113,6 @@ Output:
 
 ## Customization & Rebuild (Contributors)
 
-> ⚠️ Do not modify files inside node_modules.
-> Changes will be lost on reinstall.
-
 If you want to extend or adjust the reference data:
 
 1) Clone the repository
@@ -126,37 +123,37 @@ $ cd qlcodes
 $ npm install
 ```
 
-2) Modify files:
+2) Adapt the column (headers) configuration.
+- `.qlCodes` file (root) : gives the configuration of CSVs headers/columns (with their format and aliases)
+- `src/constants.mjs` : gives the configuration of the options passed throught `@maze014/domFetch` to fetch the documentation table of codes for the matching RDBMs.
 
-- under references/
-    -> CSV files generated from vendor online tables structure as piece of information
-- under src/
-    -> logic
+3) Run the dev script to set everything up.
+```bash
+$ npm run dev
+```
+This action will generate the folowing resources folders :
+- HTML : files from which a DOM can be fetched via domFetch.
+- CSV : CSVs files generated from the build script. These files can be modified according updated info. 
 
-> ⚠️ follow the data modification pipeline describe by the `build.sh` script.
-> unless you know what you know what you are doing.
 
-1) Rebuild the module
+4) Rebuild the module
 
 
 ```bash
-# extract htmls from the archive.zip and generate the CSVs files
-$ npm run dev
-
-# generate the qlCodes.json (at the root)
-$ npm run build
+# generate the qlCodes.json
+$ npm run build -- --prod
 ```
 
 ### Quality of life
 
-You may pass argument to the build script to enforce a few behaviours to help you seing through the process...
+By default, the build script has no flag passed but
+You may pass flag argument to the build script to enforce a few behaviours to help you seing through the processor...
 
 |argument|effect|
 |-|-|
 |`--debug`|prevents the cleanup of middle stage file created during the data processing|
-|`--make-keys`|allows the creation of keys when a description is given...through the 'generate' step (`generate.cjs`)|
+|`--prod`|will destroy the resources folder in order to keep things clean|
 
-Use your customized build via a local dependency or a forked package.
 
 ---
 

@@ -100,7 +100,7 @@ const _pushLinesOneByOne = async (fetchOptions, data, lines) => {
 		if (fetchOptions.gneric && line[0].text == `""`) {
 			line[0].text = i++;
 		}
-		
+
 		lines.push(line.map((c) => c.text).join(";"));
 		line = [];
 		col = 0;

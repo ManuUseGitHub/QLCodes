@@ -1,31 +1,38 @@
 {
   "name": "qlcodes",
-  "version": "1.1.4",
-  "main": "src/index.mjs",
+  "version": "1.1.5",
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./codes": "./dist/qlCodes.json"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "./shell/build.sh",
     "fetch": "node ./src/fetch.mjs | ./shell/display.sh",
     "refetch": "./shell/cleanUpCsvReferences.sh",
     "dev": "clear; cd ./shell; chmod +x ./*.sh; cd .. ; ./shell/settle.sh"
   },
-  "types": "types/index.d.ts",
-  "type": "module",
   "author": "Jean Luc Emmanuel VERHANNEMAN",
   "license": "MIT",
-  "description": "A small utility that unifies SQL error codes (SQLSTATE) from different DBMS into a single, normalized structure through a curated dataset constructed at build time. The module is built from authoritative vendor documentation (IBM, PostgreSQL, Oracle) and generates static reference data at build time. Find references bellow.",
+  "description": "A small utility that unifies SQL error codes (SQLSTATE) from different DBMS into a single, normalized structure through a curated dataset constructed at build time.",
   "keywords": [
-    "postgres",
-    "ibm",
-    "sql",
-    "db",
+    "sqlstate",
+    "postgresql",
     "oracle",
-    "error",
-    "appendix",
-    "codes",
-    "guidance"
+    "ibm",
+    "rdbms",
+    "sql",
+    "error-codes",
+    "database"
   ],
   "repository": {
-    "url": "git+https://github.com/ManuUseGitHub/QLCodes.git"
+    "type": "git",
+    "url": "https://github.com/ManuUseGitHub/QLCodes.git"
   },
   "devDependencies": {
     "@maze014/dom-fetch": "^1.2.1",
