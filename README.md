@@ -55,9 +55,58 @@ Output :
 }
 ```
 
+Alternatively, you may need to retrive matching codes via a known key for some technologies
+
+```js
+import { lens } from "qlcodes";
+
+const state = lens("insufficient_privilege");
+
+console.log(state);
+```
+
+Output :
+
+```js
+{
+  "key": "insufficient_privilege",
+  "qlcs": "qlcodes_success",
+  "matches": [
+    {
+      "code": "42501",
+      "keys": [
+        "insufficient_privilege",
+        "authorization_id_does_not_have_privilege_to_perform_specified_operation_on_identified_object"
+      ],
+      "reasons": [
+        "The authorization ID does not have the privilege to perform the specified operation on the identified object."
+      ],
+      "use": [
+        "pgsql",
+        "ibm"
+      ],
+      "class": "42 - Syntax Error or Access Rule Violation"
+    },
+    {
+      "code": "258",
+      "keys": [
+        "insufficient_privilege"
+      ],
+      "reasons": [
+        "Insufficient privilege"
+      ],
+      "use": [
+        "sap_hana"
+      ],
+      "class": "NA - Non associable class codes"
+    }
+  ]
+}
+```
+
 ### Mismatches
 
-If the provided SQLSTATE does not match any known entry, we return a normalized fallback object
+If the provided SQLSTATE code or provided key does not match any known entry, we return a normalized fallback object
 This guarantees that lens() always returns a predictable object shape.
 
 There are three mismatch levels that we detect.
