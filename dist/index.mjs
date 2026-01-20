@@ -1,15 +1,15 @@
-import data from "./qlCodes.json" with {type : "json"}
+import data from "./qlCodes.json" with { type: "json" };
 
 const keyRegex = /^[a-zA-Z0-9_]+$/;
 const codeRegex = /^[A-Z0-9]{5}$/;
 
 const NON_ASSOCIATED_CLASS = "NA";
 
-const QLCODES_ERR_MALFORMED = "qlcodes_malformed"
-const QLCODES_ERR_NOT_FOUND = "qlcodes_no_code_found"
-const QLCODES_ERR_UNEXPECTED_ERR = "qlcodes_unexpected_error"
+const QLCODES_ERR_MALFORMED = "qlcodes_malformed";
+const QLCODES_ERR_NOT_FOUND = "qlcodes_no_code_found";
+const QLCODES_ERR_UNEXPECTED_ERR = "qlcodes_unexpected_error";
 
-const QLCODES_SUCCESS = "qlcodes_success"
+const QLCODES_SUCCESS = "qlcodes_success";
 
 const _validateSearch = (search, response) => {
 	if (
@@ -68,6 +68,7 @@ const _classesForCodeSearch = (entries, paddedSearch) => {
 			data: data[NON_ASSOCIATED_CLASS],
 		});
 	}
+	return classesToSearch;
 };
 
 const _classesForKeySearche = (entries) => {
