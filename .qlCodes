@@ -36,6 +36,13 @@
             "Description",
             "Condition Name[as:Key]",
             "Ref"
+        ],
+        "mySql": [
+            "Code",
+            "Description",
+            "Key",
+            "Ref[as:Ref,quoted]",
+            "Advice[as:Advice,quoted]"
         ]
     }
 }

@@ -1,11 +1,11 @@
-clear;
-chmod +x ./shell/display.sh
+#!/bin/bash
+. ./shell/func.sh
 
-rm -rf ../resources/CSV/oracle_states.csv
-rm -rf ../resources/CSV/IBM_states.csv
-rm -rf ../resources/CSV/MARIA_DB_codes2.csv
-rm -rf ../resources/CSV/IBM_states2.csv
-rm -rf ../resources/CSV/sap_hana_states.csv
-rm -rf ../resources/CSV/gSpanner_states.csv
+clear
+rm -rf -v ./resources/CSV
 
-node ./src/fetch.mjs | ./shell/display.sh
+if ! [ -d "$DIR/resources/CSV" ]; then
+    
+    mkdir "$DIR/resources/CSV"
+    npm run fetch2
+fi

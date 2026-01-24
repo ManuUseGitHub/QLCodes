@@ -9,7 +9,7 @@ The module is built from authoritative vendor documentation (IBM, PostgreSQL, Or
 The project aims to cover sql states for most of RDBMS [drivers supported by **Typeorm** such as Google Spanner](https://typeorm.io/docs/drivers/google-spanner).
 Find bellow the actual coverage:
                
-🕓 MySQL | ✅ MariaDB | ✅ PostgreSQL | 🕓 CockroachDB (Postgres-compatible)
+🕓 MySQL | ✅ MariaDB | ✅ PostgreSQL | ✅ CockroachDB (Postgres-compatible)
 🕓 Microsoft SQL Server | ✅ Oracle | 🕓 SQLite | ✅ SAP HANA | ✅ Google Spanner | ✅ IBM*
 >( \* ) IBM defines and publishes SQLSTATE codes as part of the SQL standard, so their The codes should covere IBM products such as DB2, IBM Informix, IBM Netezza, IBM i (AS/400) .
 

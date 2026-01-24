@@ -14,6 +14,7 @@
   "scripts": {
     "build": "./shell/build.sh",
     "fetch": "node ./src/fetch.mjs | ./shell/display.sh",
+    "fetch2": "node ./src/fetch.mjs",
     "refetch": "./shell/cleanUpCsvReferences.sh",
     "dev": "clear; cd ./shell; chmod +x ./*.sh; cd .. ; ./shell/settle.sh"
   },
@@ -22,13 +23,20 @@
   "description": "A small utility that unifies SQL error codes (SQLSTATE) from different DBMS into a single, normalized structure through a curated dataset constructed at build time.",
   "keywords": [
     "sqlstate",
-    "postgresql",
-    "oracle",
-    "ibm",
     "rdbms",
     "sql",
     "error-codes",
-    "database"
+    "database",
+    "MySQL",
+    "MariaDB",
+    "PostgreSQL",
+    "CockroachDB",
+    "Microsoft SQL Server",
+    "Oracle",
+    "SQLite",
+    "SAP HANA",
+    "Google Spanner",
+    "IBM"
   ],
   "repository": {
     "type": "git",

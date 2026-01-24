@@ -126,7 +126,7 @@ const _pushLinesOneByOne = async (fetchOptions, data, lines) => {
 		const order = fetchOptions.headers.order[col];
 		_pushNextCellInTheLine(line, text, order);
 
-		if (++col === columnSize) {
+		if (++col === finalHeadersCount) {
 			flush();
 		}
 	}
@@ -147,20 +147,46 @@ const _printSanitizedLines = (lines) => {
 const _pushLastLine = (lines, line) => {
 	// Push remaining cells if any
 	if (line.length > 0) {
-		lines.push(line.join(";"));
+			lines.push(line.join(";"));
 	}
 };
 
 export const printCsvFromHtml = async (html, fetchOptions) => {
+	const { itemRegex } = fetchOptions;
+
 	const printed = await _collectCells(html, fetchOptions).then(async (data) => {
 		const lines = await _initLinesOfCsv(html, fetchOptions);
-		const lastLine = await _pushLinesOneByOne(fetchOptions, data, lines);
 
-		let sortedline = lastLine.sort((a, b) => a.order - b.order);
-		sortedline = lastLine.map((c) => c.text).join(";");
+		if (itemRegex) {
+			const itemsAsList = [];
+			data.forEach((x) => {
+				const m = itemRegex.exec(x.text.replaceAll(/\n\s+/g, "\n"));
 
-		_pushLastLine(lines, sortedline);
-		return _printSanitizedLines(normalizeListBlocks(lines));
+			console.log(x.text);
+				if (m) {
+					itemsAsList.push(...m.slice(1).map((x) => ({ text: x })));
+				}
+			});
+			const lastLine = await _pushLinesOneByOne(
+				fetchOptions,
+				itemsAsList,
+				lines
+			);
+
+			let sortedline = lastLine.sort((a, b) => a.order - b.order);
+			sortedline = lastLine.map((c) => c.text).join(";");
+
+			_pushLastLine(lines, sortedline);
+			return _printSanitizedLines(normalizeListBlocks(lines));
+		} else {
+			const lastLine = await _pushLinesOneByOne(fetchOptions, data, lines);
+
+			let sortedline = lastLine.sort((a, b) => a.order - b.order);
+			sortedline = lastLine.map((c) => c.text).join(";");
+
+			_pushLastLine(lines, sortedline);
+			return _printSanitizedLines(normalizeListBlocks(lines));
+		}
 	});
 	return printed;
 };

@@ -5,6 +5,7 @@ import {
 	ORACLEoptions,
 	SAP_HANAoptions,
 	POSTGRESoptions,
+	MY_SQLoptions,
 } from "./constants.mjs";
 import { logOnFulfill } from "./logQueue.mjs";
 import { fetchSource } from "./sourceFetcher.mjs";
@@ -20,6 +21,7 @@ const settled = Promise.allSettled([
 	logOnFulfill("MARIA DB", fetchSource(MARIAoptions)),
 	logOnFulfill("ORACLE", fetchSource(ORACLEoptions)),
 	logOnFulfill("POSTGRES", fetchSource(POSTGRESoptions)),
+	//logOnFulfill("MySQL", fetchSource(MY_SQLoptions)),
 ]);
 
 await logOnFulfill("ALL All files have been treated", settled);

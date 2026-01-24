@@ -48,7 +48,7 @@ echo -e "reference files read from\n${YELLOW}$DIR/resources/CSV${NC}\n"
 printStep "Composing the resulting JSON file at\n${YELLOW}$DIR${NC}\n"
 printStep "Composing ${YELLOW}(...)/$OUT_FILE${NC}"
 
-node ./src/composeCsv.mjs "$DIR/resources/CSV/POSTGRES_states2.csv" --flags 'pgsql' |\
+node ./src/composeCsv.mjs "$DIR/resources/CSV/POSTGRES_states2.csv" --flags 'pgsql:cockroach' |\
 node ./src/composeCsv.mjs "$DIR/resources/CSV/IBM_states2.csv"      --flags 'ibm' |\
 node ./src/composeCsv.mjs "$DIR/resources/CSV/oracle_states.csv"    --flags 'oracle' |\
 node ./src/composeCsv.mjs "$DIR/resources/CSV/MARIA_DB_codes2.csv"  --flags 'maria' |\

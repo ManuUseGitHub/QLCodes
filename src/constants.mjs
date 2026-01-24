@@ -71,6 +71,18 @@ export const G_SPANNER_TABLE_SELECTOR = "#error-codes + p + div table";
 export const G_SPANNER_TABLE_TAb_H_SELECTOR = "th";
 export const G_SPANNER_TABLE_CELL_SELECTOR = "td";
 
+// MySQL ======================================================================
+export const MY_SQL_HTML_STATES_REF_URL =
+	"https://dev.mysql.com/doc/mysql-errors/8.0/en/server-error-reference.html";
+export const MY_SQL_LIST_PATH = HTML_BASE_PATH + "mySqlList.html";
+export const MY_SQL_CSV_PATH = CSV_BASE_PATH + "mySql_states.csv";
+export const MY_SQL_DB_COLUMN_SIZE = 4;
+export const MY_SQL_REGEX =
+	/Error number:\s*(?<Code>\d+);\s*Symbol:\s*(?<Key>[A-Z0-9_]+);\s*(?:SQLSTATE:\s*(?<REF>[A-Z0-9]+)\s*)?Message:\s*(?<Description>[^\r\n]+)(?:\r?\n+\s*(?<Advice>[\s\S]+))?/gm;
+
+export const MY_SQL_LIST_SELECTOR = "div.itemizedlist";
+export const MY_SQL_ITEM_SELECTOR = "li";
+
 // MISC ======================================================================
 
 export const NON_ASSCIABLE_CLASS_CODE_HEADER =
@@ -184,4 +196,21 @@ export const POSTGRESoptions = {
 	tableSelector: POSTGRES_TABLE_SELECTOR,
 	headerSelector: POSTGRES_TABLE_TAb_H_SELECTOR,
 	cellSelector: POSTGRES_TABLE_CELL_SELECTOR,
+};
+
+export const MY_SQLoptions = {
+	source: {
+		tableUrl: MY_SQL_HTML_STATES_REF_URL,
+		htmlFile: MY_SQL_LIST_PATH,
+		csvFile: MY_SQL_CSV_PATH,
+	},
+	headers: {
+		descriptors: headers.mySql,
+	},
+	localFileTableSelector: "ul.itemizedlist",
+	columnSize: MY_SQL_DB_COLUMN_SIZE,
+	defaultHeader: NON_ASSCIABLE_CLASS_CODE_HEADER,
+	tableSelector: MY_SQL_LIST_SELECTOR,
+	cellSelector: MY_SQL_ITEM_SELECTOR,
+	itemRegex: MY_SQL_REGEX
 };
